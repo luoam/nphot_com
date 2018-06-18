@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>文章内容-星云号</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="http://static.anman.org/nphot/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://static.anman.org/nphot/css/nprogress.css">
+    <link rel="stylesheet" type="text/css" href="http://static.anman.org/nphot/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="http://static.anman.org/nphot/css/font-awesome.min.css">
+    <link rel="apple-touch-icon-precomposed" href="http://static.anman.org/nphot/images/icon.png">
+    <link rel="shortcut icon" href="http://static.anman.org/nphot/images/favicon.ico">
+    <script src="http://static.anman.org/nphot/js/jquery-2.1.4.min.js"></script>
+    <script src="http://static.anman.org/nphot/js/nprogress.js"></script>
+    <script src="http://static.anman.org/nphot/js/jquery.lazyload.min.js"></script>
+    <!--[if gte IE 9]>
+    <script src="http://static.anman.org/nphot/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+    <script src="http://static.anman.org/nphot/js/html5shiv.min.js" type="text/javascript"></script>
+    <script src="http://static.anman.org/nphot/js/respond.min.js" type="text/javascript"></script>
+    <script src="http://static.anman.org/nphot/js/selectivizr-min.js" type="text/javascript"></script>
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script>window.location.href = 'upgrade-browser.html';</script>
+    <![endif]-->
+
+    <style type="text/css">
+        body {
+            word-break: break-all;
+        }
+
+        .noExtension {
+            margin: auto;
+            font-size: 23px;
+        }
+    </style>
+</head>
+<body class="user-select single">
+<header class="header">
+    <nav class="navbar navbar-default" id="navbar">
+        <div class="container">
+            <div class="header-topbar hidden-xs link-border">
+                <ul class="site-nav topmenu">
+                    <!--<li><a href="users.html">作者墙</a></li>-->
+                    <li><a href="rss.html" title="RSS订阅">
+                        <i class="fa fa-rss">
+                        </i> RSS订阅
+                    </a></li>
+                </ul>
+                YES,WE BELIEVE
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#header-navbar" aria-expanded="false"><span class="sr-only"></span> <span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+                <h1 class="logo hvr-bounce-in"><a href="http://www.nphot.com/" title="星云号"><img
+                        src="http://static.anman.org/nphot/images/logo.png" alt="星云号"></a></h1>
+            </div>
+            <div class="collapse navbar-collapse" id="header-navbar">
+                <form class="navbar-form visible-xs" action="/Search" method="post">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" placeholder="请输入关键字" maxlength="20"
+                               autocomplete="off">
+                        <span class="input-group-btn">
+            <button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+            </span></div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a data-cont="星云号" title="星云号" href="index.html">首页</a></li>
+                    <li><a data-cont="文章列表" title="文章列表" href="articles.html">文章列表</a></li>
+                    <li><a data-cont="作者列表" title="作者列表" href="users.html">作者列表</a></li>
+                    <li><a data-cont="作者注册" title="作者注册" href="user_reg.html">作者注册</a></li>
+                    <li><a data-cont="发布文章" title="发布文章" href="addarticle.html">发布文章</a></li>
+                    <li><a data-cont="Nebulas" title="Nebulas" href="https://nebulas.io">Nebulas</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="noExtension col-md-12" id="noExtension">
+                注意: 请安装谷歌浏览器扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <header class="article-header">
+                <h1 class="article-title" id="title">
+
+                </h1>
+                <div class="article-meta" id="meta">
+
+                </div>
+            </header>
+            <article class="article-content" id="content">
+
+            </article>
+            <hr>
+            <div class="title">
+                <h3>友情提示：</h3>
+            </div>
+            <div id="zan">
+
+            </div>
+
+            <div class="text-center" style="margin-top: 10px;" id="buttons">
+                <a onclick="zan()" class="btn btn-large btn-primary">赞</a>
+                <a onclick="reward()" class="btn btn-large btn-success">打赏</a>
+                <a onclick="recommend()" class="btn btn-large btn-info">推荐上首页</a>
+            </div>
+
+            <div class="bdsharebuttonbox">
+                <a href="#" class="bds_more" data-cmd="more"></a>
+                <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+                <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+                <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+                <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+                <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+                <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+            </div>
+
+            <script>
+                window._bd_share_config = {
+                    "common": {
+                        "bdSnsKey": {},
+                        "bdText": "",
+                        "bdMini": "2",
+                        "bdMiniList": false,
+                        "bdPic": "",
+                        "bdStyle": "1",
+                        "bdSize": "32"
+                    }, "share": {}
+                };
+                with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+            <div class="title">
+                <h3>赞友们：</h3>
+            </div>
+            <div class="article-tags" id="zanyoumen">
+
+            </div>
+            <div class="relates">
+                <div class="title">
+                    <h3>相关推荐</h3>
+                </div>
+                <ul id="relates">
+
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+    <aside class="sidebar">
+        <div class="fixed">
+            <div class="widget widget-tabs">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab"
+                                                              data-toggle="tab" draggable="false">统计信息</a></li>
+                    <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab"
+                                               draggable="false">联系我</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane contact active" id="notice">
+                        <h2 id="articletotal">
+                        </h2>
+                        <h2>合约启动:
+                            <span id="starttime"></span></h2>
+                    </div>
+                    <div role="tabpanel" class="tab-pane contact" id="contact">
+                        <h2>Github:<a href="https://github.com/luoam">https://github.com/luoam</a> </h2>
+                        <h2>Email:
+                            <a href="mailto:xiaoman.whu@foxmail.com" target="_blank" data-toggle="tooltip" rel="nofollow"
+                               data-placement="bottom" title="" draggable="false"
+                               data-original-title="Email:xiaoman.whu@foxmail.com">xiaoman.whu@foxmail.com</a></h2>
+
+                    </div>
+                </div>
+            </div>
+            <div class="widget widget_search">
+                <form class="navbar-form" action="/Search" method="post">
+                    <div class="input-group">
+                        <input type="text" name="keyword" class="form-control" size="35" placeholder="请输入关键字"
+                               maxlength="15" autocomplete="off">
+                        <span class="input-group-btn">
+            <button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+            </span></div>
+                </form>
+            </div>
+        </div>
+        <div class="widget widget_hot">
+            <h3>最新点赞文章</h3>
+            <ul id="latestzan">
+
+
+
+            </ul>
+        </div>
+
+    </aside>
+</section>
+<footer class="footer">
+    <div class="container">
+        <p>星云号[<a href="http://www.nphot.com">www.nphot.com</a> ]由星云链[<a href="https://nebulas.io" target="_blank"
+                                                                         rel="nofollow">Nebulas</a>] 驱动.<a
+                href="http://www.miitbeian.gov.cn/" target="_blank" rel="nofollow">浙ICP备14037650号</a> &nbsp; <a
+                href="http://www.nphot.com/sitemap.xml" target="_blank" class="sitemap">网站地图</a></p>
+    </div>
+    <!--<div id="gotop"><a class="gotop"></a></div>-->
+</footer>
+<script src="http://static.anman.org/nphot/js/bootstrap.min.js"></script>
+<script src="http://static.anman.org/static/bootstrap/js/bootbox.min.js"></script>
+<script src="http://static.anman.org/static/bootstrap/js/nebulas.js"></script>
+<script src="http://static.anman.org/static/bootstrap/js/nebPay.js"></script>
+<script src="seed.js"></script>
+<script src="initcall.js"></script>
+
+<script type="text/javascript">
+    if (typeof(webExtensionWallet) === "undefined") {
+        $("#noExtensions").show();
+    }
+    var Amount = 0;
+
+    var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
+    var nebPay = new NebPay();
+    var id;
+    var account;
+    $(document).ready(function () {
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "H+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+        $.extend({
+            getUrlVars: function () {
+                var vars = [], hash;
+                var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+                for (var i = 0; i < hashes.length; i++) {
+                    hash = hashes[i].split('=');
+                    vars.push(hash[0]);
+                    vars[hash[0]] = hash[1];
+                }
+                return vars;
+            },
+            getUrlVar: function (name) {
+                return $.getUrlVars()[name];
+            }
+        });
+        id = $.getUrlVar('id');
+        //step1
+        initCall(function (params) {
+            console.log(params);
+            var tmp = [];
+            tmp.push(id);
+            var callArgs = JSON.stringify(tmp);
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: {
+                        "function": "getarticleinfo",
+                        "args": callArgs
+                    }
+                })
+                .then(function (resp) {
+                    console.log("callback resp: " + resp);
+                    if (resp.execute_err) {
+                        bootbox.dialog({
+                            backdrop: true,
+                            onEscape: true,
+                            message: resp.execute_err,
+                            size: "large",
+                            title: "Error"
+                        });
+
+                    } else {
+                        let result = JSON.parse(resp.result);
+                        console.log(result);
+                        if (result.length === 0) {
+                            let str = "<li>没有文章信息</li>";
+                            $("#content").append(str);
+                        } else {
+                            let title = result.title;
+                            account = result.account;
+                            let image = result.image;
+                            let summary = result.summary;
+                            let timestamp = result.timestamp;
+                            let content = result.content;
+                            let str_title = "";
+                            let str_meta = "";
+                            str_title = "<a href=\"article.html?id=" + id + "\" title=\"" + title + "\">" + title + "</a>";
+                            $("#title").html(str_title);
+                            str_meta = "<span class=\"item article-meta-time\">" +
+                                "                        <time class=\"time\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"发表时间：" + showtime(timestamp) + "\"" +
+                                "                              data-original-title=\"发表时间：" + showtime(timestamp) + "\">" +
+                                "                            <i class=\"glyphicon glyphicon-time\"></i>" + showtime(timestamp) +
+                                "                        </time>" +
+                                "                    </span>" +
+                                "                    <span class=\"item article-meta-source\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"\"" +
+                                "                          data-original-title=\"来源：星云号\"><i class=\"glyphicon glyphicon-globe\"></i> 星云号</span> <span" +
+                                "                        class=\"item article-meta-category\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"" + account + "\"" +
+                                "                        data-original-title=\"" + account + "\"><i class=\"glyphicon glyphicon-list\"></i> <a" +
+                                "                        href=\"user_articles.html?account=" + account + "\" title=\"" + account + "\">" + account + "</a>" +
+                                "                </span>";
+                            $("#meta").html(str_meta);
+                            $("#content").html(content);
+                        }
+
+                    }
+                })
+                .catch(function (err) {
+                    let str = "<li>没有文章信息</li>";
+                    $("#content").append(str);
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+        //step2
+        initCall(function (params) {
+            console.log(params);
+            var tmp = [];
+            tmp.push(id);
+            var callArgs = JSON.stringify(tmp);
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: {
+                        "function": "getarticlezanfee",
+                        "args": callArgs
+                    }
+                })
+                .then(function (resp) {
+                    console.log("callback resp: " + resp);
+                    if (resp.execute_err) {
+                        bootbox.dialog({
+                            backdrop: true,
+                            onEscape: true,
+                            message: resp.execute_err,
+                            size: "large",
+                            title: "Error"
+                        });
+
+                    } else {
+                        let result = JSON.parse(resp.result);
+                        console.log(result);
+                        if (result.length === 0) {
+                            console.log("没有信息");
+                        } else {
+                            let str = "";
+                            str = "<p><h3>前<b>" + result.zantotals + "</b>位点赞的用户，每人可以获得<b>" + result.zanfee + "</b>NAS奖励，当前已点赞次数为:<b>" + result.zans + "</b></h3></p>";
+                            $("#zan").html(str);
+
+                        }
+
+                    }
+                })
+                .catch(function (err) {
+
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+        //step3
+        setTimeout(function () {
+            initCall(function (params) {
+                console.log(params);
+                var tmp = [];
+                tmp.push(account);
+                tmp.push(10);
+                tmp.push(0);
+                var callArgs = JSON.stringify(tmp);
+                neb.api
+                    .call({
+                        from: params.from,
+                        to: params.to,
+                        value: params.value,
+                        nonce: params.nonce,
+                        gasPrice: params.gasPrice,
+                        gasLimit: params.gasLimit,
+                        contract: {
+                            "function": "getarticlelistbyaccount",
+                            "args": callArgs
+                        }
+                    })
+                    .then(function (resp) {
+                        console.log("callback resp: " + resp);
+                        if (resp.execute_err) {
+                            bootbox.dialog({
+                                backdrop: true,
+                                onEscape: true,
+                                message: resp.execute_err,
+                                size: "large",
+                                title: "Error"
+                            });
+
+                        } else {
+                            let result_total = JSON.parse(resp.result);
+                            let result = result_total.result;
+                            console.log(result);
+                            if (result.length === 0) {
+                                let str = "<li>没有文章信息</li>";
+                                $("#relates").append(str);
+                            } else {
+                                let str_article = "";
+                                for (let i = 0; i < result.length; i++) {
+                                    let item = result[i];
+                                    console.log(item);
+                                    str_article += "<li><a href=\"article.html?id=" + item.id + "\">" + item.title + "</a></li>";
+
+                                }
+                                $("#relates").append(str_article);
+                            }
+
+                        }
+                    })
+                    .catch(function (err) {
+                        let str = "<li>没有作者信息</li>";
+                        $("#writers").append(str);
+                        console.log(JSON.stringify(err));
+                    });
+            });
+        },3000);
+        //step4
+        initCall(function (params) {
+            console.log(params);
+            var tmp = [];
+            tmp.push(id);
+            var callArgs = JSON.stringify(tmp);
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: {
+                        "function": "getarticlezans",
+                        "args": callArgs
+                    }
+                })
+                .then(function (resp) {
+                    console.log("callback resp: " + resp);
+                    if (resp.execute_err) {
+                        bootbox.dialog({
+                            backdrop: true,
+                            onEscape: true,
+                            message: resp.execute_err,
+                            size: "large",
+                            title: "Error"
+                        });
+
+                    } else {
+                        let result = JSON.parse(resp.result);
+                        console.log(result);
+                        if (result.length === 0) {
+                            console.log("没有信息");
+                        } else {
+                            let str = "";
+                            for (let i = 0; i < result.length; i++) {
+                                str = "<a>"+result[i]+"</a>";
+                                $("#zanyoumen").append(str);
+                            }
+
+
+                        }
+
+                    }
+                })
+                .catch(function (err) {
+
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+        //step5
+        initCall(function (params) {
+            console.log(params);
+            var tmp = [];
+            tmp.push(8);
+            var callArgs = JSON.stringify(tmp);
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: {
+                        "function": "getlatestzan",
+                        "args": callArgs
+                    }
+                })
+                .then(function (resp) {
+                    console.log("callback resp: " + resp);
+                    if (resp.execute_err) {
+                        bootbox.dialog({
+                            backdrop: true,
+                            onEscape: true,
+                            message: resp.execute_err,
+                            size: "large",
+                            title: "Error"
+                        });
+
+                    } else {
+                        let result = JSON.parse(resp.result);
+                        console.log(result);
+                        if (result.length === 0) {
+                            console.log("没有信息");
+                        } else {
+                            let str = "";
+                            for (let i = 0; i < result.length; i++) {
+                                let item = result[i];
+                                console.log(item);
+                                let str_image="";
+                                if (item.image){
+                                    str_image = item.image;
+                                } else{
+                                    str_image = "http://static.anman.org/nphot/images/leftlogo.png";
+                                }
+                                str = "<li>" +
+                                    "                    <a title=\""+item.title+"\" href=\"article.html?id="+item.id+"\">" +
+                                    "                        <span class=\"thumbnail\">" +
+                                    "                            <img class=\"thumb\" data-original=\""+str_image+"\" src=\""+str_image+"\" alt=\""+item.title+"\"" +
+                                    "                                 style=\"display: block;\">" +
+                                    "                        </span>" +
+                                    "                        <span class=\"text\">"+item.title+"</span>" +
+                                    "                        <span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>"+showtime(item.timestamp)+"<br>"+(item.summary).substring(0,40)+"</span>" +
+                                    "                    </a>" +
+                                    "                </li>";
+                                $("#latestzan").append(str);
+                            }
+
+
+                        }
+
+                    }
+                })
+                .catch(function (err) {
+
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+        //step6
+        initCall(function (params) {
+            console.log(params);
+            var tmp = [];
+            var callArgs = JSON.stringify(tmp);
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: {
+                        "function": "getarticletotal",
+                        "args": callArgs
+                    }
+                })
+                .then(function (resp) {
+                    console.log("callback resp: " + resp);
+                    if (resp.execute_err) {
+                        bootbox.dialog({
+                            backdrop: true,
+                            onEscape: true,
+                            message: resp.execute_err,
+                            size: "large",
+                            title: "Error"
+                        });
+
+                    } else {
+                        let result = JSON.parse(resp.result);
+                        console.log(result);
+                        let str ="";
+                        str = "日志总数:"+result+"篇";
+                        $("#articletotal").html(str);
+
+                    }
+                })
+                .catch(function (err) {
+
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+        //step7
+        initCall(function (params) {
+            console.log(params);
+            var tmp = [];
+            var callArgs = JSON.stringify(tmp);
+            neb.api
+                .call({
+                    from: params.from,
+                    to: params.to,
+                    value: params.value,
+                    nonce: params.nonce,
+                    gasPrice: params.gasPrice,
+                    gasLimit: params.gasLimit,
+                    contract: {
+                        "function": "getstarttime",
+                        "args": callArgs
+                    }
+                })
+                .then(function (resp) {
+                    console.log("callback resp: " + resp);
+                    if (resp.execute_err) {
+                        bootbox.dialog({
+                            backdrop: true,
+                            onEscape: true,
+                            message: resp.execute_err,
+                            size: "large",
+                            title: "Error"
+                        });
+
+                    } else {
+                        let result = JSON.parse(resp.result);
+                        console.log(result);
+                        $("#starttime").html(showtime(result));
+
+                    }
+                })
+                .catch(function (err) {
+
+                    console.log(JSON.stringify(err));
+                });
+        });
+
+    });
+
+    function showtime(t) {
+        var newDate = new Date();
+        newDate.setTime(t);
+        console.log(newDate.toLocaleString());
+        return newDate.Format("yyyy年MM月dd日 HH:mm");
+    }
+
+
+    var zan = function () {
+        var tres = [];
+        tres.push(id);
+        let callArgs = JSON.stringify(tres);
+        let callFunction = "zanarticle";
+        nebPay.call(ContractAddress, Amount, callFunction, callArgs, {
+            qrcode: {
+                showQRCode: true
+            },
+            listener: cbPush        //设置listener, 处理交易返回信息
+        });
+
+    };
+    var cbPush = function (resp) {
+        console.log("response of push: " + JSON.stringify(resp));
+        if (resp.txhash) {
+            getstatus(resp.txhash);
+        }else{
+            bootbox.dialog({
+                backdrop: true,
+                onEscape: true,
+                message: JSON.stringify(resp),
+                size: "large",
+                title: "ERROR"
+            });
+        }
+    };
+    var getstatus = function (txhash) {
+        let v = this;
+        neb.api.getTransactionReceipt(txhash)
+            .then(o => {
+                console.log(JSON.stringify(o));
+                this.transaction_status = o.status;
+                this.red_address = o.from;
+                if (o.status === 2) {
+                    window.setTimeout(() => this.getstatus(txhash), 2000)
+                } else if (o.status === 1) {
+                    bootbox.dialog({
+                        backdrop: true,
+                        onEscape: true,
+                        message: "成功",
+                        size: "large",
+                        title: "SUCCESS"
+                    });
+                    setTimeout(function () {
+                        location.reload();
+                    },2000);
+
+                } else {
+                    bootbox.dialog({
+                        backdrop: true,
+                        onEscape: true,
+                        message: o.execute_result,
+                        size: "large",
+                        title: "ERROR"
+                    });
+                }
+            })
+            .catch(function (o) {
+                console.log(o)
+            })
+    };
+    var reward = function () {
+        var tres = [];
+        tres.push(id);
+        let callArgs = JSON.stringify(tres);
+        let callFunction = "rewardarticle";
+        nebPay.call(ContractAddress, Amount, callFunction, callArgs, {
+            qrcode: {
+                showQRCode: true
+            },
+            listener: cbPush        //设置listener, 处理交易返回信息
+        });
+    };
+
+    var recommend = function () {
+        var tres = [];
+        tres.push(id);
+        let callArgs = JSON.stringify(tres);
+        let callFunction = "recommend";
+        nebPay.call(ContractAddress, Amount, callFunction, callArgs, {
+            qrcode: {
+                showQRCode: true
+            },
+            listener: cbPush        //设置listener, 处理交易返回信息
+        });
+    };
+</script>
+
+</body>
+</html>

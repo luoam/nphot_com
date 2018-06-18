@@ -1,0 +1,3 @@
+$(".gotop").click(function () {
+
+});
