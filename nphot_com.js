@@ -163,11 +163,15 @@ var nphotContract = function () {
     LocalContractStorage.defineProperty(this, "regfee");
     LocalContractStorage.defineProperty(this, "SuperAdmin");
     LocalContractStorage.defineProperty(this, "start_time");
+    LocalContractStorage.defineProperty(this, "shutdown_time");
+    LocalContractStorage.defineProperty(this, "poweroff");
 };
 nphotContract.prototype = {
     init: function () {
-        this.regfee = 0.001;
+        this.regfee = 0.01;
         this.start_time = Date.now();
+        this.shutdown_time = '';
+        this.poweroff = false;
         this.SuperAdmin = 'n1Lvduf7mV6NBXwi43ahP3RqRKrnp6jHa8D';
         LocalContractStorage.set("users", {});
         LocalContractStorage.set("acticles", {});
@@ -269,12 +273,34 @@ nphotContract.prototype = {
     },
 
     /**
+     * check the contract is alive
+     * @private
+     */
+    _checkengine: function () {
+        if (this.poweroff) {
+            throw new Error("此合约已经停止运行");
+        }
+    },
+    /**
+     * shutdown the contract
+     */
+    shutdown: function () {
+        let from = Blockchain.transaction.from;
+        if (from === this.SuperAdmin) {
+            this.poweroff = true;
+            this.shutdown_time = Date.now();
+        } else {
+            throw new Error("访问受限");
+        }
+    },
+    /**
      * 修改注册时的nas参数
      * @param value
      * @returns {string}
      * @constructor
      */
     Editregfee: function (value) {
+        this._checkengine();
         let from = Blockchain.transaction.from;
         if (from == this.SuperAdmin) {
             let tvalue = parseFloat(value);
@@ -294,6 +320,7 @@ nphotContract.prototype = {
      * @constructor
      */
     Getregfee: function () {
+        this._checkengine();
         return this.regfee;
     },
 
@@ -305,6 +332,7 @@ nphotContract.prototype = {
      * @returns {string}
      */
     userregister: function (nickname, email, introduction) {
+        this._checkengine();
         //step1
         if (nickname === "" || email === "") {
             throw new Error("称呼和邮箱是必填的");
@@ -350,22 +378,29 @@ nphotContract.prototype = {
      * @param account
      */
     userreview: function (account) {
+        this._checkengine();
         let o_account = Blockchain.transaction.from;
-        let user_info = this.UserMap.get(account);
-        if (user_info) {
-            if (user_info.review) {
-                throw new Error("不能重复审查");
-            } else {
-                user_info.review = o_account;
-                this.UserMap.set(account, user_info);
-                let bigregfee = new BigNumber(this.regfee * 1000000000000000000);
-                this._transfer(Blockchain.transaction.to, o_account, bigregfee);
-                return '{"result":"1"}';
-            }
+        let o_user_info = this.UserMap.get(o_account);
+        if (o_user_info && o_user_info.review) {
+            let user_info = this.UserMap.get(account);
+            if (user_info) {
+                if (user_info.review) {
+                    throw new Error("不能重复审查");
+                } else {
+                    user_info.review = o_account;
+                    this.UserMap.set(account, user_info);
+                    let bigregfee = new BigNumber(this.regfee * 1000000000000000000);
+                    this._transfer(Blockchain.transaction.to, o_account, bigregfee);
+                    return '{"result":"1"}';
+                }
 
+            } else {
+                throw new Error("尝试审查的账号不存在");
+            }
         } else {
-            throw new Error("尝试审查的账号不存在");
+            throw new Error("当前用来审查的账号操作受限");
         }
+
     },
 
     /**
@@ -374,6 +409,7 @@ nphotContract.prototype = {
      * @param offset
      */
     getuserlist: function (limit, offset) {
+        this._checkengine();
         limit = parseInt(limit);
         offset = parseInt(offset);
         let userlist = LocalContractStorage.get("users");
@@ -404,6 +440,7 @@ nphotContract.prototype = {
      * @returns {*}
      */
     getuserinfo: function (account) {
+        this._checkengine();
         let user_info = this.UserMap.get(account);
         if (user_info) {
             return user_info;
@@ -422,13 +459,14 @@ nphotContract.prototype = {
      * @returns {string}
      */
     addarticle: function (title, summary, content, image, zanfee, zantotals) {
+        this._checkengine();
         let account = Blockchain.transaction.from;
         //step1
         let userlist = LocalContractStorage.get("users");
         let userlistArr = this._json2array(userlist);
         if (this._indexOf(userlistArr, account) > -1) {
             let user_info = this.UserMap.get(account);
-            if (user_info.review) {
+            if (user_info && user_info.review) {
                 //step2
                 if (title === "" || content === "") {
                     throw new Error("标题和内容是必填的");
@@ -502,6 +540,7 @@ nphotContract.prototype = {
      * @param id
      */
     rewardarticle: function (id) {
+        this._checkengine();
         let article_info = this.ArticlesMap.get(id);
         if (article_info) {
             let value = Blockchain.transaction.value;
@@ -517,6 +556,7 @@ nphotContract.prototype = {
      * @returns {string}
      */
     zanarticle: function (id) {
+        this._checkengine();
         //step1
         let account = Blockchain.transaction.from;
         let article_info = this.ArticlesMap.get(id);
@@ -574,6 +614,7 @@ nphotContract.prototype = {
      * @returns {number}
      */
     getarticletotal: function () {
+        this._checkengine();
         let article_lists = LocalContractStorage.get("acticles");
         let tmparticle_listsArr = this._json2array(article_lists);
         return tmparticle_listsArr.length;
@@ -586,6 +627,7 @@ nphotContract.prototype = {
      * @param offset
      */
     getarticlelist: function (limit, offset) {
+        this._checkengine();
         limit = parseInt(limit);
         offset = parseInt(offset);
         let article_lists = LocalContractStorage.get("acticles");
@@ -619,6 +661,7 @@ nphotContract.prototype = {
      * @param offset
      */
     getarticlelistbyaccount: function (account, limit, offset) {
+        this._checkengine();
         let account_article_lists = this.AccountArticleslistMap.get(account);
         if (!account_article_lists) {
             account_article_lists = new account_article_list()
@@ -656,6 +699,7 @@ nphotContract.prototype = {
      * @returns {*}
      */
     getarticleinfo: function (id) {
+        this._checkengine();
         let article_info = this.ArticlesMap.get(id);
         if (article_info) {
             return article_info;
@@ -670,6 +714,7 @@ nphotContract.prototype = {
      * @returns {*}
      */
     getarticlezanfee: function (id) {
+        this._checkengine();
         let article_zanfee = this.ArticleszanfeeMap.get(id);
         if (article_zanfee) {
             return article_zanfee;
@@ -684,6 +729,7 @@ nphotContract.prototype = {
      * @returns {Array}
      */
     getarticlezans: function (id, limit) {
+        this._checkengine();
         let article_info = this.ArticlesMap.get(id);
         if (article_info) {
             let article_zanlists = this.ArticleszanlistMap.get(id);
@@ -716,6 +762,7 @@ nphotContract.prototype = {
      * @returns {Array}
      */
     getarticlezansbylimit: function (id, limit, offset) {
+        this._checkengine();
         let article_info = this.ArticlesMap.get(id);
         if (article_info) {
             let article_zanlists = this.ArticleszanlistMap.get(id);
@@ -752,6 +799,7 @@ nphotContract.prototype = {
      * @returns {Array}
      */
     getlatestzan: function (limit) {
+        this._checkengine();
         limit = parseInt(limit);
         let latestzan_lists = LocalContractStorage.get("latestzan");
         let latestzan_listsArr = this._json2array(latestzan_lists);
@@ -776,10 +824,19 @@ nphotContract.prototype = {
     },
 
     /**
+     * getshutdowntime
+     * @returns {string}
+     */
+    getshutdowntime: function () {
+        return this.shutdown_time;
+    },
+
+    /**
      * recommend
      * @param id
      */
     recommend: function (id) {
+        this._checkengine();
         let article_info = this.ArticlesMap.get(id);
         if (article_info) {
             let recommend_lists = LocalContractStorage.get("recommend");
@@ -805,6 +862,7 @@ nphotContract.prototype = {
      * @returns {Array}
      */
     getrecommend: function () {
+        this._checkengine();
         let recommend_lists = LocalContractStorage.get("recommend");
         let recommend_listsArr = this._json2array(recommend_lists);
         let result = [];

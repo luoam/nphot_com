@@ -35,7 +35,6 @@
 
         .noExtension {
             margin: auto;
-            font-size: 23px;
         }
     </style>
 </head>
@@ -81,11 +80,11 @@
         </div>
     </nav>
 </header>
-<section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
+<section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:#c82333; color:#fff;display: none;">
     <div class="container">
         <div class="row">
             <div class="noExtension col-md-12" id="noExtension">
-                注意: 请安装谷歌浏览器扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>
+                PC端请使用谷歌浏览器浏览，需要安装钱包扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>;手机端需要安装<a href="https://nano.nebulas.io/">nano钱包</a>
             </div>
         </div>
     </div>
@@ -105,38 +104,38 @@
         <header class="article-header">
             <h1 class="article-title">写文章</h1>
         </header>
-        <div class="readers" id="article">
+        <div class="row" id="article">
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label for="title" class="col-sm-2 control-label">标题:</label>
-                    <div class="col-sm-10">
+                    <label for="title" class="col-sm-1 control-label">标题:</label>
+                    <div class="col-sm-11">
                         <input type="text" class="form-control" id="title" placeholder="文章题目" required>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="image" class="col-sm-2 control-label">插图:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" id="image" placeholder="文章图片" required>
+                    <label for="image" class="col-sm-1 control-label">插图:</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="image" placeholder="文章图片,尺寸推荐为:200px*150px" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="summary" class="col-sm-2 control-label">摘要:</label>
-                    <div class="col-sm-10">
+                    <label for="summary" class="col-sm-1 control-label">摘要:</label>
+                    <div class="col-sm-11">
                         <textarea class="form-control" id="summary"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="content" class="col-sm-2 control-label">内容:</label>
-                    <div class="col-sm-10">
+                    <label for="content" class="col-sm-1 control-label">内容:</label>
+                    <div class="col-sm-11">
                         <textarea class="form-control" id="content"></textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="content" class="col-sm-2 control-label">推广:</label>
-                    <div class="col-sm-10">
+                    <label for="content" class="col-sm-1 control-label">推广:</label>
+                    <div class="col-sm-11">
                         <table class="table table-hover">
                             <tr>
                                 <td width="100px">红包个数：</td>
@@ -191,16 +190,16 @@
     $(document).ready(function () {
         $("#content").trumbowyg({
             lang: 'zh_cn',
-            btns: [
-                ['formatting'],
-                ['strong', 'em', 'del'],
-                ['superscript', 'subscript'],
-                ['link'],
-                ['insertImage'],
-                ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
-                ['unorderedList', 'orderedList'],
-                ['horizontalRule'],
-            ]
+            // btns: [
+            //     ['formatting'],
+            //     ['strong', 'em', 'del'],
+            //     ['superscript', 'subscript'],
+            //     ['link'],
+            //     ['insertImage'],
+            //     ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull'],
+            //     ['unorderedList', 'orderedList'],
+            //     ['horizontalRule'],
+            // ]
         });
 
 

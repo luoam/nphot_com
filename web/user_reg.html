@@ -65,7 +65,6 @@
 
         .noExtension {
             margin: auto;
-            font-size: 23px;
         }
 
         body {
@@ -122,11 +121,11 @@
         </div>
     </nav>
 </header>
-<section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
+<section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:#c82333; color:#fff;display: none;">
     <div class="container">
         <div class="row">
             <div class="noExtension col-md-12" id="noExtension">
-                注意: 请安装谷歌浏览器扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>
+                PC端请使用谷歌浏览器浏览，需要安装钱包扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>;手机端需要安装<a href="https://nano.nebulas.io/">nano钱包</a>
             </div>
         </div>
     </div>
@@ -190,7 +189,7 @@
     if (typeof(webExtensionWallet) === "undefined") {
         $("#noExtensions").show();
     }
-    var Amount = 0.001;
+    var Amount = 0.01;
 
     var NebPay = require("nebpay");     //https://github.com/nebulasio/nebPay
     var nebPay = new NebPay();

@@ -34,6 +34,7 @@
 
         .noExtension {
             margin: auto;
+            font-size: 23px;
         }
     </style>
 </head>
@@ -79,13 +80,11 @@
         </div>
     </nav>
 </header>
-<section id="noExtensions"
-         style="margin-top:1px;padding-bottom: 0px;background-color:#c82333; color:#fff;display: none;">
+<section id="noExtensions" style="margin-top:1px;padding-bottom: 0px;background-color:red; color:#fff;display: none;">
     <div class="container">
         <div class="row">
             <div class="noExtension col-md-12" id="noExtension">
-                PC端请使用谷歌浏览器浏览，需要安装钱包扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>;手机端需要安装<a
-                    href="https://nano.nebulas.io/">nano钱包</a>
+                注意: 请安装谷歌浏览器扩展<a target="_blank" href="https://github.com/ChengOrangeJu/WebExtensionWallet">WebExtensionWallet</a>
             </div>
         </div>
     </div>
@@ -112,16 +111,30 @@
 
             </div>
 
-            <div class="text-center title" style="margin-top: 10px;" id="buttons">
+            <div class="text-center" style="margin-top: 10px;" id="buttons">
                 <a onclick="zan()" class="btn btn-large btn-primary">赞</a>
                 <a onclick="reward()" class="btn btn-large btn-success">打赏</a>
                 <a onclick="recommend()" class="btn btn-large btn-info">推荐上首页</a>
             </div>
 
+            <!--<div class="title">-->
+                <!--<h3>赞友们：</h3>-->
+            <!--</div>-->
+            <!--<div class="article-tags" id="zanyoumen">-->
+
+            <!--</div>-->
+            <!--<div class="relates">-->
+                <!--<div class="title">-->
+                    <!--<h3>相关推荐</h3>-->
+                <!--</div>-->
+                <!--<ul id="relates">-->
+
+                <!--</ul>-->
+            <!--</div>-->
+
 
         </div>
     </div>
-
     <aside class="sidebar">
         <div class="fixed">
             <div class="widget widget-tabs">
@@ -134,16 +147,14 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane contact active" id="notice">
                         <h2 id="articletotal">
-                            星云号
                         </h2>
                         <h2>合约启动:
                             <span id="starttime"></span></h2>
                     </div>
                     <div role="tabpanel" class="tab-pane contact" id="contact">
-                        <h2>Github:<a href="https://github.com/luoam">https://github.com/luoam</a></h2>
+                        <h2>Github:<a href="https://github.com/luoam">https://github.com/luoam</a> </h2>
                         <h2>Email:
-                            <a href="mailto:xiaoman.whu@foxmail.com" target="_blank" data-toggle="tooltip"
-                               rel="nofollow"
+                            <a href="mailto:xiaoman.whu@foxmail.com" target="_blank" data-toggle="tooltip" rel="nofollow"
                                data-placement="bottom" title="" draggable="false"
                                data-original-title="Email:xiaoman.whu@foxmail.com">xiaoman.whu@foxmail.com</a></h2>
 
@@ -161,7 +172,14 @@
                 </form>
             </div>
         </div>
+        <div class="widget widget_hot">
+            <h3>最新点赞文章</h3>
+            <ul id="latestzan">
 
+
+
+            </ul>
+        </div>
 
     </aside>
 </section>
@@ -268,7 +286,7 @@
                             let content = result.content;
                             let str_title = "";
                             let str_meta = "";
-                            $("title").html(title + '-' + $("title").html());
+                            $("title").html(title+'-'+$("title").html());
                             str_title = "<a href=\"article.html?id=" + id + "\" title=\"" + title + "\">" + title + "</a>";
                             $("#title").html(str_title);
                             str_meta = "<span class=\"item article-meta-time\">" +
@@ -334,7 +352,7 @@
                                 console.log("没有信息");
                             } else {
                                 let str = "";
-                                str = "<p>前<b>" + result.zantotals + "</b>位点赞的用户，每人可以获得<b>" + result.zanfee + "</b>NAS奖励<br/>当前已点赞次数为:<b>" + result.zans + "</b></p>";
+                                str = "<p><h3>前<b>" + result.zantotals + "</b>位点赞的用户，每人可以获得<b>" + result.zanfee + "</b>NAS奖励<br/>当前已点赞次数为:<b>" + result.zans + "</b></h3></p>";
                                 $("#zan").html(str);
 
                             }
@@ -346,10 +364,285 @@
                         console.log(JSON.stringify(err));
                     });
             });
-        }, 1000);
+        },1000);
+
+        //step3
+        // setTimeout(function () {
+        //
+        //     initCall(function (params) {
+        //         console.log(params);
+        //         var tmp = [];
+        //         tmp.push(account);
+        //         tmp.push(10);
+        //         tmp.push(0);
+        //         var callArgs = JSON.stringify(tmp);
+        //         neb.api
+        //             .call({
+        //                 from: params.from,
+        //                 to: params.to,
+        //                 value: params.value,
+        //                 nonce: params.nonce,
+        //                 gasPrice: params.gasPrice,
+        //                 gasLimit: params.gasLimit,
+        //                 contract: {
+        //                     "function": "getarticlelistbyaccount",
+        //                     "args": callArgs
+        //                 }
+        //             })
+        //             .then(function (resp) {
+        //                 console.log("callback resp: " + resp);
+        //                 if (resp.execute_err) {
+        //                     bootbox.dialog({
+        //                         backdrop: true,
+        //                         onEscape: true,
+        //                         message: resp.execute_err,
+        //                         size: "large",
+        //                         title: "Error"
+        //                     });
+        //
+        //                 } else {
+        //                     let result_total = JSON.parse(resp.result);
+        //                     let result = result_total.result;
+        //                     console.log(result);
+        //                     if (result.length === 0) {
+        //                         let str = "<li>没有文章信息</li>";
+        //                         $("#relates").append(str);
+        //                     } else {
+        //                         let str_article = "";
+        //                         for (let i = 0; i < result.length; i++) {
+        //                             let item = result[i];
+        //                             console.log(item);
+        //                             str_article += "<li><a href=\"article.html?id=" + item.id + "\">" + item.title + "</a></li>";
+        //
+        //                         }
+        //                         $("#relates").append(str_article);
+        //                     }
+        //
+        //                 }
+        //             })
+        //             .catch(function (err) {
+        //                 let str = "<li>没有作者信息</li>";
+        //                 $("#writers").append(str);
+        //                 console.log(JSON.stringify(err));
+        //             });
+        //     });
+        // },3500);
+        //step4
+        // setTimeout(function () {
+        //     initCall(function (params) {
+        //         console.log(params);
+        //         var tmp = [];
+        //         tmp.push(id);
+        //         var callArgs = JSON.stringify(tmp);
+        //         neb.api
+        //             .call({
+        //                 from: params.from,
+        //                 to: params.to,
+        //                 value: params.value,
+        //                 nonce: params.nonce,
+        //                 gasPrice: params.gasPrice,
+        //                 gasLimit: params.gasLimit,
+        //                 contract: {
+        //                     "function": "getarticlezans",
+        //                     "args": callArgs
+        //                 }
+        //             })
+        //             .then(function (resp) {
+        //                 console.log("callback resp: " + resp);
+        //                 if (resp.execute_err) {
+        //                     bootbox.dialog({
+        //                         backdrop: true,
+        //                         onEscape: true,
+        //                         message: resp.execute_err,
+        //                         size: "large",
+        //                         title: "Error"
+        //                     });
+        //
+        //                 } else {
+        //                     let result = JSON.parse(resp.result);
+        //                     console.log(result);
+        //                     if (result.length === 0) {
+        //                         console.log("没有信息");
+        //                     } else {
+        //                         let str = "";
+        //                         for (let i = 0; i < result.length; i++) {
+        //                             str = "<a>" + result[i] + "</a>";
+        //                             $("#zanyoumen").append(str);
+        //                         }
+        //
+        //
+        //                     }
+        //
+        //                 }
+        //             })
+        //             .catch(function (err) {
+        //
+        //                 console.log(JSON.stringify(err));
+        //             });
+        //     });
+        // },1500);
+
+        //step5
+        setTimeout(function () {
+            initCall(function (params) {
+                console.log(params);
+                var tmp = [];
+                tmp.push(8);
+                var callArgs = JSON.stringify(tmp);
+                neb.api
+                    .call({
+                        from: params.from,
+                        to: params.to,
+                        value: params.value,
+                        nonce: params.nonce,
+                        gasPrice: params.gasPrice,
+                        gasLimit: params.gasLimit,
+                        contract: {
+                            "function": "getlatestzan",
+                            "args": callArgs
+                        }
+                    })
+                    .then(function (resp) {
+                        console.log("callback resp: " + resp);
+                        if (resp.execute_err) {
+                            bootbox.dialog({
+                                backdrop: true,
+                                onEscape: true,
+                                message: resp.execute_err,
+                                size: "large",
+                                title: "Error"
+                            });
+
+                        } else {
+                            let result = JSON.parse(resp.result);
+                            console.log(result);
+                            if (result.length === 0) {
+                                console.log("没有信息");
+                            } else {
+                                let str = "";
+                                for (let i = 0; i < result.length; i++) {
+                                    let item = result[i];
+                                    console.log(item);
+                                    let str_image = "";
+                                    if (item.image) {
+                                        str_image = item.image;
+                                    } else {
+                                        str_image = "http://static.anman.org/nphot/images/leftlogo.png";
+                                    }
+                                    str = "<li>" +
+                                        "                    <a title=\"" + item.title + "\" href=\"article.html?id=" + item.id + "\">" +
+                                        "                        <span class=\"thumbnail\">" +
+                                        "                            <img class=\"thumb\" data-original=\"" + str_image + "\" src=\"" + str_image + "\" alt=\"" + item.title + "\"" +
+                                        "                                 style=\"display: block;\">" +
+                                        "                        </span>" +
+                                        "                        <span class=\"text\">" + item.title + "</span>" +
+                                        "                        <span class=\"muted\"><i class=\"glyphicon glyphicon-time\"></i>" + showtime(item.timestamp) + "<br>" + (item.summary).substring(0, 40) + "</span>" +
+                                        "                    </a>" +
+                                        "                </li>";
+                                    $("#latestzan").append(str);
+                                }
 
 
-        $("#starttime").html(showtime("1529371605000"));
+                            }
+
+                        }
+                    })
+                    .catch(function (err) {
+
+                        console.log(JSON.stringify(err));
+                    });
+            });
+        },2000);
+
+        //step6
+        setTimeout(function () {
+            initCall(function (params) {
+                console.log(params);
+                var tmp = [];
+                var callArgs = JSON.stringify(tmp);
+                neb.api
+                    .call({
+                        from: params.from,
+                        to: params.to,
+                        value: params.value,
+                        nonce: params.nonce,
+                        gasPrice: params.gasPrice,
+                        gasLimit: params.gasLimit,
+                        contract: {
+                            "function": "getarticletotal",
+                            "args": callArgs
+                        }
+                    })
+                    .then(function (resp) {
+                        console.log("callback resp: " + resp);
+                        if (resp.execute_err) {
+                            bootbox.dialog({
+                                backdrop: true,
+                                onEscape: true,
+                                message: resp.execute_err,
+                                size: "large",
+                                title: "Error"
+                            });
+
+                        } else {
+                            let result = JSON.parse(resp.result);
+                            console.log(result);
+                            let str = "";
+                            str = "日志总数:" + result + "篇";
+                            $("#articletotal").html(str);
+
+                        }
+                    })
+                    .catch(function (err) {
+
+                        console.log(JSON.stringify(err));
+                    });
+            });
+        },3000);
+
+        //step7
+        setTimeout(function () {
+            initCall(function (params) {
+                console.log(params);
+                var tmp = [];
+                var callArgs = JSON.stringify(tmp);
+                neb.api
+                    .call({
+                        from: params.from,
+                        to: params.to,
+                        value: params.value,
+                        nonce: params.nonce,
+                        gasPrice: params.gasPrice,
+                        gasLimit: params.gasLimit,
+                        contract: {
+                            "function": "getstarttime",
+                            "args": callArgs
+                        }
+                    })
+                    .then(function (resp) {
+                        console.log("callback resp: " + resp);
+                        if (resp.execute_err) {
+                            bootbox.dialog({
+                                backdrop: true,
+                                onEscape: true,
+                                message: resp.execute_err,
+                                size: "large",
+                                title: "Error"
+                            });
+
+                        } else {
+                            let result = JSON.parse(resp.result);
+                            console.log(result);
+                            $("#starttime").html(showtime(result));
+
+                        }
+                    })
+                    .catch(function (err) {
+
+                        console.log(JSON.stringify(err));
+                    });
+            });
+        },3500);
 
     });
 
@@ -362,9 +655,6 @@
 
 
     var zan = function () {
-        if (checkclient()) {
-            return false;
-        }
         var tres = [];
         tres.push(id);
         let callArgs = JSON.stringify(tres);
@@ -381,7 +671,7 @@
         console.log("response of push: " + JSON.stringify(resp));
         if (resp.txhash) {
             getstatus(resp.txhash);
-        } else {
+        }else{
             bootbox.dialog({
                 backdrop: true,
                 onEscape: true,
@@ -410,7 +700,7 @@
                     });
                     setTimeout(function () {
                         location.reload();
-                    }, 2000);
+                    },2000);
 
                 } else {
                     bootbox.dialog({
@@ -427,9 +717,6 @@
             })
     };
     var reward = function () {
-        if (checkclient()) {
-            return false;
-        }
         var tres = [];
         tres.push(id);
         let callArgs = JSON.stringify(tres);
@@ -443,9 +730,6 @@
     };
 
     var recommend = function () {
-        if (checkclient()) {
-            return false;
-        }
         var tres = [];
         tres.push(id);
         let callArgs = JSON.stringify(tres);
@@ -457,22 +741,6 @@
             listener: cbPush        //设置listener, 处理交易返回信息
         });
     };
-
-    var alertstr = "";
-    var checkclient = function () {
-        var ua = navigator.userAgent.toLowerCase();
-        if (ua.match(/MicroMessenger/i) == 'micromessenger') {
-            alertstr = "微信浏览器不能调用星云钱包，请在浏览器中打开";
-            bootbox.dialog({
-                backdrop: true,
-                onEscape: true,
-                message: alertstr,
-                size: "large",
-                title: "ERROR"
-            });
-            return true;
-        }
-    }
 </script>
 
 </body>
